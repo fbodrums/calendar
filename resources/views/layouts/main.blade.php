@@ -85,35 +85,7 @@
 
 
     <script src="{{ asset('assets/js/app.js') }}"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDkrAORsI_ObYG9Yx88NkbO3Ee7hqaDl3s&libraries=places" async defer></script>
-
-
-
-    <script>
-        function formatToReal(value) {
-            const numericValue = isNaN(value) ? 0 : parseFloat(value);
-            return `R$ ${numericValue.toFixed(2).replace('.', ',').replace(/\B(?=(\d{3})+(?!\d))/g, ".")}`;
-        }
-
-        function defaultOptionsDatatable() {
-            return {
-                processing: true,
-                serverSide: true,
-                ordering: true,
-                // searching: false,
-                lengthChange: false,
-                scrollX: true,
-                language: {
-                    url: "/assets/js/datatable.json"
-                },
-            }
-        }
-
-        $(function() {
-            $('.valor').mask('#.##0,00', {
-                reverse: true
-            });
-        })
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDkrAORsI_ObYG9Yx88NkbO3Ee7hqaDl3s&libraries=places">
     </script>
     @yield('scripts')
 </body>

@@ -9,14 +9,15 @@ use App\Http\Controllers\UserController;
 // ROTAS DE AUTENTICAÇÃO
 Route::view('/', 'auth.login')->name('/');
 Route::view('login', 'auth.login')->name('login.view');
-Route::view('recover/{email}/{token}', 'auth.recover-password')->name('recover-password.view');
+
+Route::get('logout', [AuthController::class, 'logout'])->name('logout');
+Route::get('recover/{email}/{token}', [AuthController::class, 'showRecoverPassword'])->name('recover-password.view');
+Route::get('email/validate/{id}/{token}', [AuthController::class, 'validateEmail'])->name('validate-email');
 
 Route::post('login', [AuthController::class, 'login'])->name('login');
-Route::get('logout', [AuthController::class, 'logout'])->name('logout');
+Route::post('signup', [AuthController::class, 'signup'])->name('signup');
 Route::post('forget-password', [AuthController::class, 'sendPasswordResetLink'])->name('forget-password');
 Route::post('recover-password', [AuthController::class, 'resetPassword'])->name('recover-password');
-Route::post('signup', [AuthController::class, 'signup'])->name('signup');
-Route::get('email/validate/{id}/{token}', [AuthController::class, 'validateEmail'])->name('validate-email');
 
 
 

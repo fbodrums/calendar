@@ -144,4 +144,17 @@ class AuthController extends Controller
         // Caso contrário, retorna com erro
         return Response::redirect(message: 'Problema ao alterar a senha', routeName: $redirectRoute);
     }
+
+    public function showRecoverPassword($email, $token)
+    {
+        // Verifica se o token é válido
+        $status = Password::tokenExists(User::where('email', $email)->first(), $token);
+
+        if (!$status) {
+            return Redirect::route('login.view')->with('error', 'O link de recuperação de senha expirou ou é inválido.');
+        }
+
+        // Exibe a view normalmente se o token for válido
+        return view('auth.recover-password', compact('email', 'token'));
+    }
 }

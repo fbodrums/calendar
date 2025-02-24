@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\ValidCpf;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
@@ -19,7 +20,7 @@ class ContactRequest extends FormRequest
             'name' => 'required|string|max:255',
             'document' => [
                 'required',
-                'regex:/^\d{3}\.\d{3}\.\d{3}-\d{2}$/', // Validação de CPF
+                new ValidCpf, // Validação de CPF
                 Rule::unique('contacts', 'document')->ignore($this->route('contact'))->where('user_id', Auth::user()->id) // Ignora o CPF do próprio contato sendo atualizado
             ],
             'zip' => 'required|regex:/^\d{5}-\d{3}$/', // Validação do formato do CEP
